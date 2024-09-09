@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@atproto/identity": "^0.4.1",
+    "@atproto/syntax": "^0.3.0",
+    "@tanstack/react-query": "^5.55.4",
     "next": "14.2.8",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "server-only": "^0.0.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "at browser",
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`text-sm antialiased`}>{children}</body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className={`p-4 text-sm antialiased`}>{children}</body>
+      </html>
+    </Providers>
   );
 }
