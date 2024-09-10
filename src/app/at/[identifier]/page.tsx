@@ -1,5 +1,5 @@
 import { getCollections } from "@/lib/atproto";
-import { resolveHandle, resolveDid } from "@/lib/server/atproto";
+import { getIdentity } from "@/lib/server/atproto";
 import { getPds } from "@atproto/identity";
 import Link from "next/link";
 
@@ -8,24 +8,21 @@ export default async function Page({
 }: {
   params: { identifier: string };
 }) {
-  const decoded = decodeURIComponent(params.identifier);
-  const did = await resolveHandle(decoded);
-  if (!did) return <div>Invalid handle</div>;
-  const doc = await resolveDid(did);
-  if (!doc) return <div>Invalid handle</div>;
-  const pds = getPds(doc);
+  const { didDocument, handle } = await getIdentity(params.identifier);
+  const pds = getPds(didDocument);
   if (!pds) return <div>Missing PDS</div>;
 
-  const collections = await getCollections(did, pds);
+  const collections = await getCollections(didDocument.id, pds);
 
   return (
     <div className="space-y-4">
-      <div>handle: {decoded}</div>
+      <div>handle: {handle}</div>
       <div>
-        did: <pre className="inline">{did}</pre>
+        did: <pre className="inline">{didDocument.id}</pre>
       </div>
       <div>
-        doc: <pre className="inline">{JSON.stringify(doc, null, 2)}</pre>
+        doc:{" "}
+        <pre className="inline">{JSON.stringify(didDocument, null, 2)}</pre>
       </div>
       <div>
         collections:{" "}

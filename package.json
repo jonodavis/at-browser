@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@atproto/did": "^0.1.1",
     "@atproto/identity": "^0.4.1",
     "@atproto/syntax": "^0.3.0",
     "@tanstack/react-query": "^5.55.4",
-    "next": "14.2.8",
+    "next": "14.2.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "server-only": "^0.0.1",

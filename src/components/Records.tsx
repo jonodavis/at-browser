@@ -3,6 +3,7 @@
 import { getRecords, type GetRecordsResponse } from "@/lib/atproto";
 import { AtUri } from "@atproto/syntax";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 export function Records(props: {
   initialData: GetRecordsResponse;
@@ -24,14 +25,20 @@ export function Records(props: {
 
   return (
     <div>
-      <pre>
-        {data.pages.map((page) =>
-          page.records.map((record) => {
-            const atUri = new AtUri(record.uri);
-            return <div key={record.uri}>{atUri.rkey}</div>;
-          }),
-        )}
-      </pre>
+      {data.pages.map((page) =>
+        page.records.map((record) => {
+          const atUri = new AtUri(record.uri);
+          return (
+            <Link
+              href={`/at/${props.did}/${props.collection}/${atUri.rkey}`}
+              key={record.uri}
+              className="block w-fit font-mono underline"
+            >
+              {atUri.rkey}
+            </Link>
+          );
+        }),
+      )}
       {hasNextPage && (
         <button className="border" onClick={() => fetchNextPage()}>
           load more

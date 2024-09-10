@@ -1,5 +1,5 @@
 import { getRecords } from "@/lib/atproto";
-import { resolveHandle, resolveDid } from "@/lib/server/atproto";
+import { getIdentity } from "@/lib/server/atproto";
 import { Records } from "@/components/Records";
 import { getPds } from "@atproto/identity";
 
@@ -8,23 +8,22 @@ export default async function Page({
 }: {
   params: { identifier: string; collection: string };
 }) {
-  const decoded = decodeURIComponent(params.identifier);
-  const did = await resolveHandle(decoded);
-  if (!did) return <div>Invalid handle</div>;
-  const doc = await resolveDid(did);
-  if (!doc) return <div>Invalid handle</div>;
-  const pds = getPds(doc);
+  const { didDocument } = await getIdentity(params.identifier);
+  const pds = getPds(didDocument);
   if (!pds) return <div>Missing PDS</div>;
 
-  const initialRecords = await getRecords(did, pds, params.collection);
+  const initialRecords = await getRecords(
+    didDocument.id,
+    pds,
+    params.collection,
+  );
 
   return (
     <div>
-      {JSON.stringify(params)}
       <Records
         initialData={initialRecords}
         collection={params.collection}
-        did={did}
+        did={didDocument.id}
         pds={pds}
       />
     </div>
