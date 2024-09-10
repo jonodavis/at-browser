@@ -35,7 +35,7 @@ export async function getRecords(
   listRecordsUrl.searchParams.set("repo", did);
   listRecordsUrl.searchParams.set("collection", collection);
   if (cursor) listRecordsUrl.searchParams.set("cursor", cursor);
-  const res = await fetch(listRecordsUrl);
+  const res = await fetch(listRecordsUrl, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to list records: ${res.statusText}`);
   return listRecordsSchema.parse(await res.json());
 }
@@ -50,7 +50,7 @@ export async function getRecord(
   getRecordUrl.searchParams.set("repo", did);
   getRecordUrl.searchParams.set("collection", collection);
   getRecordUrl.searchParams.set("rkey", rkey);
-  const res = await fetch(getRecordUrl);
+  const res = await fetch(getRecordUrl, { next: { revalidate: 60 * 10 } });
   if (!res.ok) throw new Error(`Failed ot get record: ${res.statusText}`);
   const json = await res.json();
   return json;
