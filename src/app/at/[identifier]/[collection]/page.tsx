@@ -8,7 +8,7 @@ export default async function Page({
 }: {
   params: { identifier: string; collection: string };
 }) {
-  const { didDocument } = await getIdentity(params.identifier);
+  const { didDocument, handle } = await getIdentity(params.identifier);
   const pds = getPds(didDocument);
   if (!pds) return <div>Missing PDS</div>;
 
@@ -25,6 +25,7 @@ export default async function Page({
         collection={params.collection}
         did={didDocument.id}
         pds={pds}
+        handle={handle}
       />
     </div>
   );

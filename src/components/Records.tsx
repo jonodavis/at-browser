@@ -10,6 +10,7 @@ export function Records(props: {
   did: string;
   pds: string;
   collection: string;
+  handle?: string;
 }) {
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["records", props.collection, props.did],
@@ -30,7 +31,7 @@ export function Records(props: {
           const atUri = new AtUri(record.uri);
           return (
             <Link
-              href={`/at/${props.did}/${props.collection}/${atUri.rkey}`}
+              href={`/at/${props.handle ?? props.did}/${props.collection}/${atUri.rkey}`}
               key={record.uri}
               className="block w-fit font-mono underline"
             >

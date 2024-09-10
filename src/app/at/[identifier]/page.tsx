@@ -28,7 +28,7 @@ export default async function Page({
         collections:{" "}
         {collections.map((nsid) => (
           <Link
-            href={`/at/${params.identifier}/${nsid}`}
+            href={`/at/${handle}/${nsid}`}
             key={nsid}
             className="block underline"
           >
