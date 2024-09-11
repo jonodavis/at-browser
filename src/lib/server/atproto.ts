@@ -20,7 +20,7 @@ export async function getIdentity(identifier: string) {
   const decoded = decodeURIComponent(identifier);
   if (isValidHandle(decoded)) {
     const did = await resolveHandle(decoded);
-    if (!did) throw new Error("Failed to resolve DID from handle");
+    if (!did) throw new Error(`Failed to resolve DID from handle: ${decoded}`);
     const doc = await resolveDid(did);
     if (!doc) throw new Error(`Failed to fetch didDocument for DID: ${did}`);
     return { handle: decoded, didDocument: doc };
