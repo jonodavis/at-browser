@@ -10,7 +10,7 @@ import {
 import { Fragment } from "react";
 
 /**
- * Generates all possible paths from a given path string in a functional manner.
+ * Generates all possible paths from a given path string.
  * @param input - The input path string, e.g., `/at/danabra.mov/app.bsky.feed.post/3l3tjecnrfi2z`
  * @returns An array of possible paths.
  */
