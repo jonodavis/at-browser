@@ -1,4 +1,4 @@
-import { getCollections } from "@/lib/atproto";
+import { getAuditLog, getCollections } from "@/lib/atproto";
 import { getIdentity } from "@/lib/server/atproto";
 import { getPds } from "@atproto/identity";
 import Link from "next/link";
@@ -13,6 +13,7 @@ export default async function Page({
   if (!pds) return <div>Missing PDS</div>;
 
   const collections = await getCollections(didDocument.id, pds);
+  const auditLog = await getAuditLog(didDocument.id);
 
   return (
     <div className="space-y-4">
@@ -30,11 +31,14 @@ export default async function Page({
           <Link
             href={`/at/${handle}/${nsid}`}
             key={nsid}
-            className="block underline"
+            className="block w-fit underline"
           >
             {nsid}
           </Link>
         ))}
+      </div>
+      <div>
+        Audit Log: <pre>{JSON.stringify(auditLog, null, 2)}</pre>
       </div>
     </div>
   );

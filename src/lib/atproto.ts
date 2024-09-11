@@ -55,3 +55,10 @@ export async function getRecord(
   const json = await res.json();
   return json;
 }
+
+export async function getAuditLog(did: string) {
+  const res = await fetch(`https://plc.directory/${did}/log/audit`);
+  if (!res.ok) throw new Error(`Failed to fetch audit log for DID: ${did}`);
+  const json = await res.json();
+  return json;
+}
