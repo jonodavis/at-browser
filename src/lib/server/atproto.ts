@@ -1,4 +1,5 @@
 import "server-only";
+// The `IdResolver` seems to rely on some node only features
 
 import { IdResolver, getHandle } from "@atproto/identity";
 import { isValidHandle } from "@atproto/syntax";
