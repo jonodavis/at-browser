@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/CodeBlock";
 import { getAuditLog, getCollections } from "@/lib/atproto";
 import { getIdentity } from "@/lib/server/atproto";
 import { getPds } from "@atproto/identity";
@@ -19,11 +20,14 @@ export default async function Page({
     <div className="space-y-4">
       <div>handle: {handle}</div>
       <div>
-        did: <pre className="inline">{didDocument.id}</pre>
+        DID: <pre className="inline">{didDocument.id}</pre>
       </div>
       <div>
-        doc:{" "}
-        <pre className="inline">{JSON.stringify(didDocument, null, 2)}</pre>
+        DID Document:
+        <CodeBlock
+          code={JSON.stringify(didDocument, null, 2)}
+          language="json"
+        />
       </div>
       <div>
         collections:{" "}
@@ -38,7 +42,8 @@ export default async function Page({
         ))}
       </div>
       <div>
-        Audit Log: <pre>{JSON.stringify(auditLog, null, 2)}</pre>
+        Audit Log:
+        <CodeBlock code={JSON.stringify(auditLog, null, 2)} language="json" />
       </div>
     </div>
   );

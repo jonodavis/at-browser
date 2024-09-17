@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/CodeBlock";
 import { getRecord } from "@/lib/atproto";
 import { getIdentity } from "@/lib/server/atproto";
 import { getPds } from "@atproto/identity";
@@ -20,5 +21,5 @@ export default async function Page({
     params.collection,
     params.rkey,
   );
-  return <pre>{JSON.stringify(record, null, 2)}</pre>;
+  return <CodeBlock code={JSON.stringify(record, null, 2)} language="json" />;
 }
