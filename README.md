@@ -24,7 +24,7 @@ A web-based explorer for AT Protocol (Bluesky) repositories, allowing users to b
 ### Prerequisites
 
 - Node.js 18+
-- pnpm (or npm/yarn)
+- pnpm
 
 ### Installation
 
